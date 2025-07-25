@@ -1,0 +1,142 @@
+{
+  "tableName": "roles",
+  "displayName": "Roles",
+  "icon": "shield-check",
+  "description": "User roles and permissions",
+  "seedData": [
+    {
+      "name": "admin",
+      "display_name": "Administrator",
+      "description": "Full system access"
+    },
+    {
+      "name": "user",
+      "display_name": "Standard User",
+      "description": "Basic user access"
+    },
+    {
+      "name": "moderator",
+      "display_name": "Moderator",
+      "description": "Content moderation access"
+    }
+  ],
+  "columns": {
+    "id": {
+      "dbConstraints": {
+        "type": "serial",
+        "nullable": false,
+        "primaryKey": true
+      },
+      "ui": {
+        "label": "ID",
+        "readonly": true,
+        "section": "metadata",
+        "order": 1
+      }
+    },
+    "name": {
+      "dbConstraints": {
+        "type": "varchar",
+        "length": 50,
+        "nullable": false,
+        "unique": true
+      },
+      "validation": {
+        "required": true,
+        "min": 2,
+        "max": 50,
+        "pattern": "^[a-z_]+$"
+      },
+      "ui": {
+        "label": "Role Name",
+        "placeholder": "admin, user, moderator",
+        "helpText": "Lowercase letters and underscores only",
+        "section": "basic",
+        "order": 1
+      }
+    },
+    "display_name": {
+      "dbConstraints": {
+        "type": "varchar",
+        "length": 100,
+        "nullable": false
+      },
+      "validation": {
+        "required": true,
+        "min": 2,
+        "max": 100
+      },
+      "ui": {
+        "label": "Display Name",
+        "placeholder": "Administrator",
+        "helpText": "Human-readable role name",
+        "section": "basic",
+        "order": 2
+      }
+    },
+    "description": {
+      "dbConstraints": {
+        "type": "text",
+        "nullable": true
+      },
+      "validation": {
+        "max": 500
+      },
+      "ui": {
+        "label": "Description",
+        "placeholder": "Describe this role's purpose...",
+        "helpText": "Optional role description",
+        "multiline": true,
+        "section": "basic",
+        "order": 3
+      }
+    },
+    "created_at": {
+      "dbConstraints": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "now()"
+      },
+      "ui": {
+        "label": "Created At",
+        "readonly": true,
+        "format": "datetime",
+        "section": "metadata",
+        "order": 2
+      }
+    },
+    "updated_at": {
+      "dbConstraints": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "now()"
+      },
+      "ui": {
+        "label": "Updated At",
+        "readonly": true,
+        "format": "datetime",
+        "section": "metadata",
+        "order": 3
+      }
+    }
+  },
+  "indexes": {
+    "idx_roles_name": {
+      "columns": ["name"],
+      "unique": true
+    }
+  },
+  "relationships": {
+    "users": {
+      "type": "many-to-many",
+      "table": "users",
+      "pivotTable": "user_roles"
+    }
+  },
+  "ui": {
+    "listFields": ["display_name", "name", "description", "created_at"],
+    "searchFields": ["name", "display_name", "description"],
+    "sortField": "name",
+    "sortOrder": "asc"
+  }
+}

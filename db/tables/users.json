@@ -1,0 +1,222 @@
+{
+  "tableName": "users",
+  "displayName": "Users",
+  "icon": "users",
+  "description": "System users and their profiles",
+  "seedData": [
+    {
+      "email": "admin@example.com",
+      "first_name": "Admin",
+      "last_name": "User",
+      "status": "active"
+    },
+    {
+      "email": "john@example.com",
+      "first_name": "John",
+      "last_name": "Doe",
+      "status": "pending"
+    }
+  ],
+  "columns": {
+    "id": {
+      "dbConstraints": {
+        "type": "serial",
+        "nullable": false,
+        "primaryKey": true
+      },
+      "ui": {
+        "label": "ID",
+        "readonly": true,
+        "section": "metadata",
+        "order": 1
+      }
+    },
+    "email": {
+      "dbConstraints": {
+        "type": "varchar",
+        "length": 255,
+        "nullable": false,
+        "unique": true
+      },
+      "validation": {
+        "required": true,
+        "email": true,
+        "max": 255
+      },
+      "ui": {
+        "label": "Email Address",
+        "placeholder": "user@example.com",
+        "helpText": "Must be a valid email address",
+        "section": "basic",
+        "order": 1
+      }
+    },
+    "first_name": {
+      "dbConstraints": {
+        "type": "varchar",
+        "length": 100,
+        "nullable": false
+      },
+      "validation": {
+        "required": true,
+        "min": 2,
+        "max": 100
+      },
+      "ui": {
+        "label": "First Name",
+        "placeholder": "Enter first name",
+        "section": "basic",
+        "order": 2
+      }
+    },
+    "last_name": {
+      "dbConstraints": {
+        "type": "varchar",
+        "length": 100,
+        "nullable": false
+      },
+      "validation": {
+        "required": true,
+        "min": 2,
+        "max": 100
+      },
+      "ui": {
+        "label": "Last Name",
+        "placeholder": "Enter last name",
+        "section": "basic",
+        "order": 3
+      }
+    },
+    "bio": {
+      "dbConstraints": {
+        "type": "text",
+        "nullable": true
+      },
+      "validation": {
+        "max": 1000
+      },
+      "ui": {
+        "label": "Bio",
+        "placeholder": "Tell us about yourself...",
+        "helpText": "Optional biography (max 1000 characters)",
+        "multiline": true,
+        "section": "profile",
+        "order": 1
+      }
+    },
+    "status": {
+      "dbConstraints": {
+        "type": "user_status",
+        "nullable": false,
+        "default": "pending"
+      },
+      "validation": {
+        "required": true
+      },
+      "ui": {
+        "label": "Account Status",
+        "section": "management",
+        "order": 1
+      }
+    },
+    "age": {
+      "dbConstraints": {
+        "type": "integer",
+        "nullable": true
+      },
+      "validation": {
+        "min": 13,
+        "max": 120
+      },
+      "ui": {
+        "label": "Age",
+        "placeholder": "Enter age",
+        "helpText": "Must be between 13 and 120",
+        "section": "profile",
+        "order": 2
+      }
+    },
+    "salary": {
+      "dbConstraints": {
+        "type": "numeric",
+        "precision": 10,
+        "scale": 2,
+        "nullable": true
+      },
+      "validation": {
+        "min": 0
+      },
+      "ui": {
+        "label": "Annual Salary",
+        "format": "currency",
+        "prefix": "£",
+        "section": "profile",
+        "order": 3
+      }
+    },
+    "website": {
+      "dbConstraints": {
+        "type": "varchar",
+        "length": 500,
+        "nullable": true
+      },
+      "validation": {
+        "url": true,
+        "max": 500
+      },
+      "ui": {
+        "label": "Website",
+        "placeholder": "https://example.com",
+        "format": "url",
+        "section": "profile",
+        "order": 4
+      }
+    },
+    "created_at": {
+      "dbConstraints": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "now()"
+      },
+      "ui": {
+        "label": "Created At",
+        "readonly": true,
+        "format": "datetime",
+        "section": "metadata",
+        "order": 2
+      }
+    },
+    "updated_at": {
+      "dbConstraints": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "now()"
+      },
+      "ui": {
+        "label": "Updated At",
+        "readonly": true,
+        "format": "datetime",
+        "section": "metadata",
+        "order": 3
+      }
+    }
+  },
+  "indexes": {
+    "idx_users_email": {
+      "columns": ["email"],
+      "unique": true
+    },
+    "idx_users_status": {
+      "columns": ["status"]
+    },
+    "idx_users_name": {
+      "columns": ["first_name", "last_name"]
+    }
+  },
+  "ui": {
+    "listFields": ["first_name", "last_name", "email", "status", "created_at"],
+    "searchFields": ["first_name", "last_name", "email"],
+    "sortField": "created_at",
+    "sortOrder": "desc"
+  }
+}

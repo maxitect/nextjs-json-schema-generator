@@ -1,0 +1,86 @@
+{
+  "tableName": "user_roles",
+  "displayName": "User Roles",
+  "icon": "shield",
+  "description": "Many-to-many relationship between users and roles",
+  "seedData": [
+    {
+      "user_id": 1,
+      "role_id": 1
+    },
+    {
+      "user_id": 2,
+      "role_id": 2
+    }
+  ],
+  "columns": {
+    "user_id": {
+      "dbConstraints": {
+        "type": "integer",
+        "nullable": false,
+        "primaryKey": true,
+        "references": {
+          "table": "users",
+          "column": "id",
+          "onDelete": "cascade"
+        }
+      },
+      "validation": {
+        "required": true
+      },
+      "ui": {
+        "label": "User",
+        "section": "basic",
+        "order": 1
+      }
+    },
+    "role_id": {
+      "dbConstraints": {
+        "type": "integer",
+        "nullable": false,
+        "primaryKey": true,
+        "references": {
+          "table": "roles",
+          "column": "id",
+          "onDelete": "cascade"
+        }
+      },
+      "validation": {
+        "required": true
+      },
+      "ui": {
+        "label": "Role",
+        "section": "basic",
+        "order": 2
+      }
+    },
+    "assigned_at": {
+      "dbConstraints": {
+        "type": "timestamp",
+        "nullable": false,
+        "default": "now()"
+      },
+      "ui": {
+        "label": "Assigned At",
+        "readonly": true,
+        "format": "datetime",
+        "section": "metadata",
+        "order": 1
+      }
+    }
+  },
+  "indexes": {
+    "idx_user_roles_user": {
+      "columns": ["user_id"]
+    },
+    "idx_user_roles_role": {
+      "columns": ["role_id"]
+    }
+  },
+  "ui": {
+    "listFields": ["user_id", "role_id", "assigned_at"],
+    "searchFields": [],
+    "sortField": "assigned_at",
+    "sortOrder": "desc"
+  }
+}

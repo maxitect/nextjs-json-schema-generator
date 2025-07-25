@@ -1,0 +1,22 @@
+{
+  "values": ["active", "inactive", "pending", "suspended"],
+  "labels": {
+    "active": "Active User",
+    "inactive": "Inactive User",
+    "pending": "Pending Approval",
+    "suspended": "Suspended Account"
+  },
+  "colors": {
+    "active": "success",
+    "inactive": "neutral",
+    "pending": "warning",
+    "suspended": "error"
+  },
+  "icons": {
+    "active": "check-circle",
+    "inactive": "x-circle",
+    "pending": "clock",
+    "suspended": "ban"
+  },
+  "description": "User account status options"
+}

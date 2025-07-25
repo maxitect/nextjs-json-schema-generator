@@ -136,10 +136,13 @@ function generateFormField(
 
   let options = "undefined";
   if (enumKey) {
-    // Generate enum options
-    const enumOptions = enums[enumKey].values
+    // Generate enum options from new nested structure
+    const enumOptions = Object.keys(enums[enumKey])
+      .filter((key) => key !== "description")
       .map((value) => {
-        const optionLabel = enums[enumKey].labels?.[value] || value;
+        const enumValue = enums[enumKey][value];
+        const optionLabel =
+          typeof enumValue === "object" ? enumValue.label || value : value;
         return `{ value: "${value}", label: "${optionLabel}" }`;
       })
       .join(", ");

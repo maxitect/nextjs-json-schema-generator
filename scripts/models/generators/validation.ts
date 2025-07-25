@@ -23,7 +23,10 @@ import { generateModelAggregation } from "../utils/aggregation";
 function generateEnumSchemas(enums: EnumsConfig): string {
   const enumSchemas = Object.entries(enums)
     .map(([enumName, config]) => {
-      const values = config.values.map((v) => `'${v}'`).join(", ");
+      const values = Object.keys(config)
+        .filter((key) => key !== "description")
+        .map((v) => `'${v}'`)
+        .join(", ");
       const schemaName = `${toCamelCase(enumName)}Schema`;
       return `export const ${schemaName} = z.enum([${values}]);`;
     })

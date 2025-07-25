@@ -1,22 +1,23 @@
 {
-  "values": ["active", "inactive", "pending", "suspended"],
-  "labels": {
-    "active": "Active User",
-    "inactive": "Inactive User",
-    "pending": "Pending Approval",
-    "suspended": "Suspended Account"
+  "active": {
+    "label": "Active User",
+    "color": "success",
+    "icon": "check-circle"
   },
-  "colors": {
-    "active": "success",
-    "inactive": "neutral",
-    "pending": "warning",
-    "suspended": "error"
+  "inactive": {
+    "label": "Inactive User",
+    "color": "neutral",
+    "icon": "x-circle"
   },
-  "icons": {
-    "active": "check-circle",
-    "inactive": "x-circle",
-    "pending": "clock",
-    "suspended": "ban"
+  "pending": {
+    "label": "Pending Approval",
+    "color": "warning",
+    "icon": "clock"
+  },
+  "suspended": {
+    "label": "Suspended Account",
+    "color": "error",
+    "icon": "ban"
   },
   "description": "User account status options"
 }

@@ -18,7 +18,10 @@ import { generateModelAggregation } from "../utils/aggregation";
 function generateEnumDefinitions(enums: EnumsConfig): string {
   const enumDefs = Object.entries(enums)
     .map(([enumName, config]) => {
-      const values = config.values.map((v) => `'${v}'`).join(", ");
+      const values = Object.keys(config)
+        .filter((key) => key !== "description")
+        .map((v) => `'${v}'`)
+        .join(", ");
       return `export const ${toCamelCase(
         enumName,
       )} = pgEnum('${enumName}', [${values}]);`;

@@ -1,12 +1,15 @@
 // TypeScript interfaces for validating JSON schema configuration files
 // This file defines the structure for our JSON-driven schema system
 
+export interface EnumValueConfig {
+  label?: string;
+  color?: string;
+  icon?: string;
+}
+
 export interface EnumConfig {
-  values: string[];
-  labels?: Record<string, string>;
-  colors?: Record<string, string>;
-  icons?: Record<string, string>;
-  description?: string;
+  description: string;
+  [enumKey: string]: EnumValueConfig | string;
 }
 
 export interface EnumsConfig {
